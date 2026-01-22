@@ -9,6 +9,6 @@ The Apache Software Foundation (http://www.apache.org/).
 Portions of this software are derived from the Apache Bahir project (http://bahir.apache.org/), which is licensed under the Apache License, Version 2.0.
 
 InfluxDB 3 Connector for Apache Flink
-Copyright (c) 2025 timmindstorms.
+Copyright (c) 2025-2026 timmindstorms.
 
 The modifications, additions, and derivative work were developed by timmindstorms.

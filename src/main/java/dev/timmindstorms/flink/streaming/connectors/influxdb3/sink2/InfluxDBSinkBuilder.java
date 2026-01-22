@@ -24,6 +24,10 @@
  * - Added setInfluxDBDatabase() configuration option.
  * - Updated sanityCheck() to reflect authentication changes.
  * - Updated package to dev.timmindstorms.flink.streaming.connectors.influxdb3.sink2.
+ * Modified by timmindstorms on 22 January 2026.
+ * Copyright (c) 2026 timmindstorms. All rights reserved.
+ * Changes: 
+ * - Added setSslRootsFilePath() configuration option.
  */
 package dev.timmindstorms.flink.streaming.connectors.influxdb3.sink2;
 
@@ -115,6 +119,18 @@ public final class InfluxDBSinkBuilder<IN> {
     public InfluxDBSinkBuilder<IN> setInfluxDBDatabase(final String databaseName) {
         this.databaseName = databaseName;
         this.configuration.setString(INFLUXDB_DATABASE, checkNotNull(databaseName));
+        return this;
+    }
+
+    /**
+     * Sets the ssl Roots File Path for the influx client.
+     *
+     * @param sslRootsFilePath the path to the ssl Roots File Path, the file should
+     *                         be in pem format.
+     * @return this InfluxDBSinkBuilder.
+     */
+    public InfluxDBSinkBuilder<IN> setSslRootsFilePath(final String sslRootsFilePath) {
+        this.configuration.setString(SSL_ROOTS_FILE_PATH, checkNotNull(sslRootsFilePath));
         return this;
     }
 

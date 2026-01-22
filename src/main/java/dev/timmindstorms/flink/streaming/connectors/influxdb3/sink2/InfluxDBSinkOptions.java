@@ -24,10 +24,16 @@
  * - Removed legacy authentication (username/password/org).
  * - Added database configuration option.
  * - Updated package to dev.timmindstorms.flink.streaming.connectors.influxdb3.sink2.
+ * Modified by timmindstorms on 22 January 2026.
+ * Copyright (c) 2026 timmindstorms. All rights reserved.
+ * Changes: 
+ * - Added a configuration option for sslRootsFilePath.
  */
 package dev.timmindstorms.flink.streaming.connectors.influxdb3.sink2;
 
 import com.influxdb.v3.client.InfluxDBClient;
+import com.influxdb.v3.client.config.ClientConfig;
+
 import org.apache.flink.configuration.ConfigOption;
 import org.apache.flink.configuration.ConfigOptions;
 import org.apache.flink.configuration.Configuration;
@@ -66,11 +72,24 @@ public final class InfluxDBSinkOptions {
                         .noDefaultValue()
                         .withDescription("InfluxDB database name.");
 
+        public static final ConfigOption<String> SSL_ROOTS_FILE_PATH = ConfigOptions
+                        .key("sink.influxDB.client.sslRootsFilePath")
+                        .stringType()
+                        .defaultValue(null)
+                        .withDescription("InfluxDB sslRootsFilePath.");
+
         public static InfluxDBClient getInfluxDBClient(final Configuration configuration) {
                 final String url = configuration.getString(INFLUXDB_URL);
                 final String token = configuration.getString(INFLUXDB_TOKEN);
                 final String database = configuration.getString(INFLUXDB_DATABASE);
+                final String sslRootsFilePath = configuration.getString(SSL_ROOTS_FILE_PATH);
 
-                return InfluxDBClient.getInstance(url, token.toCharArray(), database);
+                ClientConfig influxConfig = new ClientConfig.Builder()
+                                .host(url)
+                                .token(token.toCharArray())
+                                .database(database)
+                                .sslRootsFilePath(sslRootsFilePath).build();
+
+                return InfluxDBClient.getInstance(influxConfig);
         }
 }

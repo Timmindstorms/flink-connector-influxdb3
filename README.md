@@ -63,6 +63,7 @@ public class TestSerializer implements InfluxDBSchemaSerializer<SensorMeasuremen
 | `setInfluxDBDatabase(String)`     | The target database name.                      | Yes      | -       |
 | `setWriteBufferSize(int)`         | Number of points to buffer before writing.     | No       | 1000    |
 | `addCheckpointDataPoint(boolean)` | Write a debug point on every Flink checkpoint. | No       | `false` |
+| `setSslRootsFilePath`             | Set the path to a ssl root file for tls        | No       | null    |
 
 ## Building from Source
 
@@ -80,6 +81,6 @@ This project is a derivative work of the **[Apache Bahir InfluxDB 2 connector](h
 
 - **Original Project:** [Apache Bahir](https://bahir.apache.org/)
 - **Original Copyright:** Copyright (c) 2016-2017 The Apache Software Foundation.
-- **Modifications:** Copyright (c) 2025 timmindstorms.
+- **Modifications:** Copyright (c) 2025-2026 timmindstorms.
 
 See the `NOTICE` file for full attribution details.
